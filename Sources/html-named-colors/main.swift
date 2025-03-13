@@ -6,7 +6,7 @@ let outFile = URL(fileURLWithPath: "./\(colorListName).clr")
 
 let colorList = NSColorList(name: colorListName)
 
-if let data = readCSV(from: inputFile) {
+if let data = readCSV(from: inputFile, dropFirstRow: true) {
     for row in data {
         if let color = NSColor(hex: row[1]) {
             colorList.setColor(color, forKey: row[0])

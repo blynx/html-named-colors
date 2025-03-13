@@ -1,8 +1,15 @@
-func readCSV(from filepath: String, delimiter: String = ",") -> [[String]]? {
+func readCSV(from filepath: String, delimiter: String = ",", dropFirstRow: Bool = false)
+    -> [[String]]?
+{
     do {
         let content = try String(contentsOfFile: filepath)
         var result: [[String]] = []
-        let rows = content.components(separatedBy: .newlines)
+        var rows = content.components(separatedBy: .newlines)
+
+        if dropFirstRow {
+            rows.removeFirst()
+        }
+
         for row in rows {
             if !row.isEmpty {
                 let columns = row.components(separatedBy: delimiter).map {
